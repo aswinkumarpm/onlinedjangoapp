@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class='col-sm-6 col-sm-offset-3'>
+
+<h1>{{ title }}</h1>
+<h1>{{ instance.content }}</h1>
+<p>Author: {{ instance.user.username }}</p>
+</div>
+
+
+
+{% endblock content %}

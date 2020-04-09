@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class='col-sm-6 col-sm-offset-3'>
+    <h1>{{ title }}</h1>
+    {% for obj in object_list %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="thumbnail">
+                <div class="caption post-detail-item">
+                    <h3>{{ obj.title }}</h3>
+                    <h2>{{ obj.updated }}</h2>
+                    <h2>{{ obj.timestamp }}</h2>
+                </div>
+
+                <a href="{% url 'update' obj.id %}" class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-edit"></span> Edit
+                </a>
+
+                <a href="{% url 'delete' obj.id %}" class="btn btn-danger btn-sm">
+                    <span class="glyphicon glyphicon-trash"></span> delete
+                </a>
+
+                <a href="{% url 'detail' obj.id %}" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-info-sign"></span> Info
+                </a>
+
+
+            </div>
+        </div>
+        <hr/>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+{% endblock content %}

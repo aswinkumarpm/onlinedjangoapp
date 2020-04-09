@@ -1,0 +1,122 @@
+{% load static %}
+<html>
+<head>
+    <title>Django Diary and Resume</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+{% block style %}{% endblock style %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+    {% block head_extra %} {% endblock head_extra %}
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Django Diary</a>
+        </div>
+        {% if request.user.is_authenticated %}
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href='/'>Home</a></li>
+
+            <li><a href='{% url "create" %}'>Create Diary</a></li>
+            <li><a href='{% url "list" %}'>My Diarys</a></li>
+            {% if not request.user.is_superuser %}
+
+            <li><a href='{% url "public" %}'>Public Diarys</a></li>
+            {% endif %}
+
+
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome {{ user.username }}<span class="caret"></span></a>
+
+                <ul class="dropdown-menu">
+                    <li><a href='{% url "change_password" %}'><span class="glyphicon glyphicon-repeat"></span> Change Password</a></li>
+                    <li><a href='/update_profile'><span class="glyphicon glyphicon-user"></span>Update Profile</a></li>
+
+                    <li><a href='/logout'><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+                </ul>
+            </li>
+        </ul>
+
+        {% endif %}
+
+        {% if not request.user.is_authenticated %}
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href='/'>Home</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href='/register'><span class="glyphicon glyphicon-user"></span> Register</a></li>
+            <li><a href='/login'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+
+        {% endif %}
+    </div>
+</nav>
+
+{% include "messages_display.html" %}
+<div class='container'>
+    <!--    <ol class='breadcrumb'>-->
+    <!--        <li><a href='/'>Home</a></li>-->
+
+    <!--        {% block post_detail_link %}-->
+    <!--        {% endblock %}-->
+
+    <!--        {% if not request.user.is_authenticated %}-->
+    <!--        <li class='pull-right'><a href='/register'>Register</a></li>-->
+    <!--        <li class='pull-right'><a href='/login'>Login</a></li>-->
+    <!--        {% else %}-->
+    <!--        <li class='pull-right'>Welcome {{ user.username }}</li>-->
+    <!--        <li class='pull-right'><a href='/logout'>Logout</a></li>-->
+    <!--        <li class='pull-right'><a href='{% url "change_password" %}'>Change Password</a></li>-->
+    <!--        <li class='pull-right'><a href='{% url "create" %}'>Create Diary</a></li>-->
+    <!--        <li class='pull-right'><a href='{% url "list" %}'>My Diarys</a></li>-->
+    <!--        {% if not request.user.is_superuser %}-->
+
+    <!--        <li class='pull-right'><a href='{% url "public" %}'>Public Diarys</a></li>-->
+    <!--        {% endif %}-->
+
+    <!--        {% endif %}-->
+    <!--    </ol>-->
+    {% block content %}{% endblock content %}
+</div>
+</body>
+</html>
